@@ -1,3 +1,7 @@
+/* ===========================
+   Global Styles
+=========================== */
+
 body {
     margin: 0;
     padding: 0;
@@ -8,6 +12,8 @@ body {
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
 }
+
+/* Headings */
 h1,
 h2 {
     font-weight: bold;
@@ -15,6 +21,7 @@ h2 {
     text-shadow: 2px 2px 4px #000;
 }
 
+/* Links */
 a {
     color: #00ffff;
     text-decoration: none;
@@ -24,6 +31,16 @@ a {
 a:hover {
     color: #ff00ff;
 }
+
+/* Paragraphs */
+p {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+/* ===========================
+   Forms and Inputs
+=========================== */
 
 form {
     margin-top: 20px;
@@ -48,13 +65,45 @@ input[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
 input[type="submit"]:hover {
     background-color: #00ccff;
 }
 
-/* Room Container */
+/* ===========================
+   Navigation Lists
+=========================== */
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+}
+
+li a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #00ffff;
+    color: #000;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+li a:hover {
+    background-color: #00cccc;
+}
+
+/* ===========================
+   Room Container and Animations
+=========================== */
+
 .room {
     background-color: #1e1e1e;
     padding: 30px;
@@ -66,7 +115,6 @@ input[type="submit"]:hover {
     animation: doorOpen 2s ease forwards;
 }
 
-/* Door animation */
 @keyframes doorOpen {
     0% {
         transform: scaleX(0);
@@ -98,32 +146,125 @@ input[type="submit"]:hover {
     }
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+/* ===========================
+   Leaderboard Table Styling
+=========================== */
+
+table {
+    width: 90%;
+    max-width: 600px;
+    margin: 30px auto;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    /* vertical spacing between rows */
+    background: #1e1e1e;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+    border-radius: 15px;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-li {
-    margin: 10px 0;
-}
-
-li a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #00ffff;
+thead th {
+    background: linear-gradient(45deg, #00ffff, #00cccc);
     color: #000;
-    border-radius: 8px;
-    font-weight: bold;
+    font-weight: 700;
+    padding: 15px 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom: none;
+}
+
+tbody tr {
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+    color: #e0f7fa;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+    cursor: default;
+    border-radius: 12px;
+}
+
+tbody tr:hover {
+    background: linear-gradient(135deg, #00ffff, #00cccc);
+    color: #000;
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #00ffff;
+}
+
+tbody td {
+    padding: 15px 20px;
+    border: none;
+}
+
+tbody td:first-child {
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+tbody td:last-child {
+    font-size: 1.1em;
+    font-weight: 900;
+    text-align: right;
+}
+
+/* ===========================
+   Additional Link Styling Below Table
+=========================== */
+
+p a {
+    color: #00ffff;
     text-decoration: none;
-    transition: background-color 0.3s;
+    font-weight: bold;
+    font-size: 1.1em;
 }
 
-li a:hover {
-    background-color: #00cccc;
+p a:hover {
+    color: #00cccc;
+    text-decoration: underline;
 }
 
-/* Style for plain text paragraphs */
-p {
-    font-size: 18px;
-    margin-top: 20px;
+/* Fade-in for non-room pages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-10px);
+    }
+
+    40% {
+        transform: translateX(10px);
+    }
+
+    60% {
+        transform: translateX(-10px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.shake {
+    animation: shake 0.5s ease;
 }

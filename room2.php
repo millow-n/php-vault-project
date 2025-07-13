@@ -7,6 +7,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 $error = "";
+$shake = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $answer = trim($_POST['answer']);
@@ -16,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     } else {
         $error = "Incorrect answer. Try again.";
+        $shake = "shake";
     }
 }
 ?>
@@ -27,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="room">
+    <div class="room <?php echo $shake; ?>">
         <h2>Room 2 Puzzle</h2>
         <p><strong>Riddle:</strong> I speak without a mouth and hear without ears. I have nobody, but I come alive with wind. What am I?</p>
 

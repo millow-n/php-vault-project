@@ -6,30 +6,53 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-// user data
 $username = $_SESSION['user'];
 $score = $_SESSION['score'] ?? 0;
 
-// Save to scores.txt
-$entry = "$username|$score\n";
-file_put_contents("scores.txt", $entry, FILE_APPEND);
+// Read current scores
+$scores = [];
+if (file_exists("scores.txt")) {
+    $lines = file("scores.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $parts = explode(":", trim($line));
+        if (count($parts) === 2) {
+            list($user, $scr) = $parts;
+            $scores[$user] = (int)$scr;
+        }
+    }
+}
 
-// reset game
-session_destroy();
+// Update score if it's higher or a new user
+if (!isset($scores[$username]) || $score > $scores[$username]) {
+    $scores[$username] = $score;
+
+    // Save updated scores to the file
+    $fileContent = "";
+    foreach ($scores as $user => $scr) {
+        $fileContent .= "$user:$scr\n";
+    }
+    file_put_contents("scores.txt", $fileContent);
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Escape Complete!</title>
+    <title>Final Room - The PHP Vault</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>🎉 Congratulations, <?php echo htmlspecialchars($username); ?>!</h1>
-    <p>You escaped successfully.</p>
-    <p>Your final score: <strong><?php echo $score; ?></strong></p>
+    <div class="fade-in" style="max-width:600px; margin: 40px auto; padding: 20px;">
+        <h1>Congratulations, <?php echo htmlspecialchars($username); ?>!</h1>
+        <h2>You have successfully escaped The PHP Vault!</h2>
 
-    <a href="leaderboard.php">View Leaderboard</a><br>
-    <a href="index.php">Return to Login</a>
+        <p>Your final score is: <strong><?php echo $score; ?></strong></p>
+
+        <div style="margin-top: 30px;">
+            <p><a href="leaderboard.php">View Leaderboard</a></p>
+            <p><a href="menu.php">Back to Menu</a></p>
+            <p><a href="logout.php">Log Out</a></p>
+        </div>
+    </div>
 </body>
 </html>

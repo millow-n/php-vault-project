@@ -6,6 +6,9 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
+$error = "";
+$shake = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $answer = trim($_POST['answer']);
 
@@ -14,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     } else {
         $error = "Incorrect answer. Try again.";
+        $shake = "shake";
     }
 }
 ?>
@@ -25,19 +29,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="room">
+    <div class="room <?php echo $shake; ?>">
         <h2>Welcome, <?php echo htmlspecialchars($_SESSION['user']); ?>!</h2>
         <h3>Room 1 Puzzle</h3>
-        <p><strong>Riddle:</strong> I follow you by day but vanish at night. What am I?</p>
 
-        <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+        <p>Solve this riddle to continue:</p>
+        <blockquote>I follow you by day but vanish at night. What am I?</blockquote>
+
+        <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
 
         <form method="POST">
-            <input type="text" name="answer" placeholder="Your Answer" required><br>
+            Your Answer: <input type="text" name="answer" required>
             <input type="submit" value="Submit">
         </form>
 
-        <p><a href="hint.php?room=1">Need a Hint? (−10 points)</a></p>
+        <br>
+        <a href="hint.php?room=1">Need a hint? (−10 points)</a>
         <p>Current Score: <?php echo $_SESSION['score']; ?></p>
     </div>
 </body>
