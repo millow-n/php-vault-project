@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $answer = trim($_POST['answer']);
     
     if (strtolower($answer) == "echo") {
-        header("Location: final.php");
+        header("Location: room3.php");
         exit;
     } else {
         $error = "Incorrect answer. Try again.";

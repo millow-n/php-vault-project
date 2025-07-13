@@ -25,9 +25,9 @@ $hintText = "";
 if ($room == 1) {
     $hintText = "I appear when light is around, but disappear in the dark.";
 } elseif ($room == 2) {
-    $hintText = "It's something you use every day but don't see at night.";
+    $hintText = "It repeats what you say in a hollow space.";
 } else {
-    $hintText = "No hint available for this room.";
+    $hintText = "You leave these behind when walking in snow or sand.";
 }
 ?>
 
