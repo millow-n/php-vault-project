@@ -10,13 +10,11 @@ if (!isset($_SESSION['user'])) {
 // check if answer was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $answer = trim($_POST['answer']);
-    
-// case-insensitive 
+
+    // case-insensitive
     if (strtolower($answer) == "shadow") {
         header("Location: room2.php");
         exit;
-    }
-
     } else {
         $error = "Incorrect answer. Try again.";
     }
