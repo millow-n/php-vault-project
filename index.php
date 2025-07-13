@@ -13,8 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         list($storedUser, $storedPass) = explode(":", trim($line));
         if ($user == $storedUser && $pass == $storedPass) {
             $_SESSION['user'] = $user;
-            $_SESSION['score'] = 100; // start score
-            header("Location: room1.php");
+            $_SESSION['score'] = 100; // Starting score
+            header("Location: menu.php");
             exit;
         }
     }
