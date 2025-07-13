@@ -10,8 +10,15 @@ if (!isset($_SESSION['user'])) {
 $room = isset($_GET['room']) ? $_GET['room'] : null;
 
 
-$_SESSION['score'] -= 10;
+if (!isset($_SESSION['hint_used'])) {
+    $_SESSION['hint_used'] = [];
+}
 
+// only deduct if  haven’t used hint for this room yet
+if (!isset($_SESSION['hint_used'][$room])) {
+    $_SESSION['score'] -= 10;
+    $_SESSION['hint_used'][$room] = true;
+}
 // hint for room 1
 $hintText = "";
 
