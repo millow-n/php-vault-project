@@ -18,6 +18,7 @@ if (!isset($_SESSION['user'])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="room">
     <h1>Welcome to The PHP Vault</h1>
     <h2>Hello, <?php echo htmlspecialchars($_SESSION['user']); ?>!</h2>
 
@@ -28,5 +29,6 @@ if (!isset($_SESSION['user'])) {
         <li><a href="leaderboard.php">View Leaderboard</a></li>
         <li><a href="logout.php">Log Out</a></li>
     </ul>
+    </body>
 </body>
 </html>

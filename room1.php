@@ -1,17 +1,14 @@
 <?php
 session_start();
 
-// check if user is logged in
 if (!isset($_SESSION['user'])) {
     header("Location: index.php");
     exit;
 }
 
-// check if answer was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $answer = trim($_POST['answer']);
 
-    // case-insensitive
     if (strtolower($answer) == "shadow") {
         header("Location: room2.php");
         exit;
@@ -28,22 +25,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Welcome, <?php echo htmlspecialchars($_SESSION['user']); ?>!</h2>
-    <h3>Room 1 Puzzle</h3>
+    <div class="room">
+        <h2>Welcome, <?php echo htmlspecialchars($_SESSION['user']); ?>!</h2>
+        <h3>Room 1 Puzzle</h3>
+        <p><strong>Riddle:</strong> I follow you by day but vanish at night. What am I?</p>
 
-    <p>Solve this riddle to continue:</p>
-    <blockquote>
-        I follow you by day but vanish at night. What am I?
-    </blockquote>
+        <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
 
-    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+        <form method="POST">
+            <input type="text" name="answer" placeholder="Your Answer" required><br>
+            <input type="submit" value="Submit">
+        </form>
 
-    <form method="POST">
-        Your Answer: <input type="text" name="answer" required>
-        <input type="submit" value="Submit">
-    </form>
-
-    <br>
-    <a href="hint.php?room=1">Need a hint? (−10 points)</a>
+        <p><a href="hint.php?room=1">Need a Hint? (−10 points)</a></p>
+        <p>Current Score: <?php echo $_SESSION['score']; ?></p>
+    </div>
 </body>
 </html>
